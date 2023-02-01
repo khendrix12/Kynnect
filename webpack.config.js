@@ -5,7 +5,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 module.exports = {
     mode: 'development',
     entry: {
-        bundle: path.resolve(__dirname, 'src/index.js'),
+        bundle: path.resolve(__dirname, 'client/index.js'),
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -33,12 +33,12 @@ module.exports = {
                 ],
             },
             {
-                test: /\.js$/,
+                test: /.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                     options : {
-                        presets: ['@babel/preset-env']
+                        presets: ['@babel/preset-env', "@babel/preset-react"]
                     }
                 }
             },
@@ -52,7 +52,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'Webpack App',
             filename: 'index.html',
-            template: 'src/template.html'
+            template: 'client/template.html'
         }),
         new BundleAnalyzerPlugin(),
     ]
