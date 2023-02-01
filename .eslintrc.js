@@ -17,5 +17,8 @@ module.exports = {
       "react/jsx-filename-extension": "off",
       "react/prop-types": "off",
     },
+    "settings": {
+      "react": { "version": "detect"}
+    }
   };
   
