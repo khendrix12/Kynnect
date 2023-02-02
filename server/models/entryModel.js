@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 /**
 * Check out the `createdAt` field below. This is set up to use Mongo's automatic document
@@ -9,7 +10,12 @@ const Schema = mongoose.Schema;
 * could last up to 90 seconds before it's deleted, but still pretty cool!)
 */
 const connectionSchema = new Schema({
-  connectionName: { type: String, required: true, unique: true }
+  connectionName: { type: String, required: true, unique: true },
+  employerValue: { type: String, required: true },
+  positionValue: { type: String, required: true },
+  linkedinValue: { type: String, required: true },
+  lastConnectionValue: { type: Date, required: true },
+  notesValue: { type: String },
 });
 
 module.exports = mongoose.model('Connection', connectionSchema);

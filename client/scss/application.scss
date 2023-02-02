@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
+body{
+    background-color: #effaf6;
+    font-family: 'Roboto', sans-serif;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+.input_form{
+    display: flex;
+    flex-direction: column;
+}
+.inputs{
+    display: flex;
+}
+input {
+    flex-grow: 1;
+
+
+    border: 0;
+    outline: 0;
+    color: rgb(60, 66, 87);
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    padding: 4px 8px;
+    min-height: 28px;
+    vertical-align: middle;
+    transition: background-color .24s,box-shadow .24s;
+    transition-property: background-color, box-shadow;
+    transition-duration: 0.24s, 0.24s;
+    transition-timing-function: ease, ease;
+    transition-delay: 0s, 0s;
+
+
+}
+input:focus{
+    box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(58 151 212 / 36%) 0px 0px 0px 4px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;
+}
+button {
+    // flex-grow: 1;
+    width: 16.8%;
+
+
+    
+    
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border: 1px solid #1d1c1d4d;
+    font-weight: 700;
+    background: #fff;
+    padding: 0 12px 1px;
+    font-size: 15px;
+    border-radius: 4px;
+    color: rgb(29, 28, 29);
+    height: 36px;
+    transition: all 80ms linear;
+
+    
+
+
+}
+button:hover{
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 8%);
+    background: rgba(248,248,248,1);
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+#app{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.labels{
+    display: flex;
+}
+.label{
+    width: calc(100%/6);
+    text-align: center;
+}

@@ -1,14 +1,16 @@
 import React from 'react';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import MainContainer from './containers/MainContainer.jsx';
-import Input from './components/Input.jsx';
 
 const App = () => (
-  <div id="app">
-    <h2>Hello There</h2>
-    <p>Welcome to my shitty project.</p>
-    <Input />
-    <MainContainer />
-  </div>
-);
+  <GoogleOAuthProvider clientId="">
+    <div id="app">
+      <h1>Insert name here</h1>
+      <h3>Beep boop beep.</h3>
+      <MainContainer />
+    </div>
+  </GoogleOAuthProvider>
 
+
+);
 export default App;

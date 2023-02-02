@@ -5,13 +5,13 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 module.exports = {
   mode: 'development',
   entry: {
-    bundle: path.resolve(__dirname, 'client/index.js'),
+    bundle: ('./client/index.js'),
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name][contenthash].js',
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js',
     // clean: true,
-    // assetModuleFilename: '[name][ext]'
+    // assetModuleFilename: '[name][ext]',
   },
   devtool: 'source-map',
   devServer: {
@@ -52,7 +52,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Webpack App',
       filename: 'index.html',
-      template: 'client/template.html',
+      template: path.join(__dirname, 'template.html'),
     }),
     new BundleAnalyzerPlugin(),
   ],
@@ -63,14 +63,16 @@ module.exports = {
       tls: false,
       net: false,
       path: false,
-      zlib: false,
+      //   zlib: false,
       http: false,
       https: false,
-      stream: false,
+      //   stream: false,
       crypto: false,
       url: false,
       util: false,
-      buffer: false, 
+      buffer: false,
+      // zlib: require.resolve('browserify-zlib'),
+      // stream: require.resolve('stream-browserify'),
     },
   },
 };

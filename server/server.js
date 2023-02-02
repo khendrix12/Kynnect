@@ -8,12 +8,10 @@ require('dotenv').config();
 const uri = process.env.ATLAS_URI;
 // console.log('uri', process.env);
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-const connection = mongoose.connection;
+const { connection } = mongoose;
 connection.once('open', () => {
-console.log("MongoDB database connection established successfully");
-})
-
-const userController = require('./controllers/entryController');
+  console.log('MongoDB database connection established successfully');
+});
 
 
 const app = express();
@@ -24,41 +22,49 @@ app.use(express.json());
 
 app.use('/client', express.static(path.resolve(__dirname, '../client')));
 
+if (process.env.NODE_ENV === 'production') {
+  // statically serve everything in the build folder on the route '/build'
+  app.use('/build', express.static(path.join(__dirname, '../build')));
+  // serve index.html on the route '/'
+  app.get('/', (req, res) => res.status(200).sendFile(path.join(__dirname, '../template.html')));
+}
+
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client/template.html'));
+  res.sendFile(path.resolve(__dirname, '../client/template.html'));
 });
 
 app.get('/entry', entryController.getEntries, (req, res) => {
-    console.log('hitting getEntry');
-    return res.status(200).json(res.locals.entries);
+  console.log('hitting getEntry');
+  return res.status(200).json(res.locals.entries);
 });
 
 app.post('/entry', entryController.createEntry, (req, res) => {
-    console.log('hitting createEntry');
-    return res.status(201).json(res.locals.newConnection);
+  console.log('hitting createEntry');
+  return res.status(201).json(res.locals.newConnection);
+});
+
+app.delete('/entry', entryController.deleteEntry, (req, res) => {
+  console.log('hitting createEntry');
+  return res.status(201).json(res.locals.removedConnection);
 });
 
 
-
-
-
-  /**
+/**
  * 404 handler
  */
-app.use('*', (req,res) => {
-    res.status(404).send('Not Found');
-  });
-  
+app.use('*', (req, res) => {
+  res.status(404).send('Not Found');
+});
+
 /**
  * Global error handler
  */
 app.use((err, req, res, next) => {
-console.log(err);
-res.status(500).send({ error: err });
+  console.log(err);
+  res.status(500).send({ error: err });
 });
 
 
-
 app.listen(port, () => {
-console.log(`Server is running on port: ${port}`);
+  console.log(`Server is running on port: ${port}`);
 });
