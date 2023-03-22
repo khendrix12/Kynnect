@@ -1,19 +1,15 @@
-/* eslint-disable import/extensions */
-/* eslint-disable react/jsx-max-props-per-line */
-import React, { useState, useEffect } from 'react';
-import { GoogleLogin } from '@react-oauth/google';
-import Entry from '../components/Entry.jsx';
+import React, { useState, useEffect, useContext } from 'react';
 import Input from '../components/Input.jsx';
 import Table from '../components/Table.jsx';
-import GoogleAPIAuth from '../components/GoogleAPIAuth.jsx';
-import Login from '../components/Login.jsx';
-import ImplicitLogin from '../components/ImplicitLogin.jsx';
+import { AuthContext } from '../components/AuthContext.jsx';
 
 
 const MainContainer = () => {
+  const { isAuthenticated } = useContext(AuthContext);
+
   const [entries, setEntries] = useState([]);
-  const displayFields = ['Name', 'Employer', 'Position', 'Linkedin', 'Last Connection', 'Notes'];
-  const fields = ['connectionName', 'employerValue', 'positionValue', 'linkedinValue', 'lastConnectionValue', 'notesValue'];
+  const displayFields = ['Name', 'Employer', 'Position', 'Linkedin', 'Last Connection', 'Notes', 'Next Connection'];
+  const fields = ['connectionName', 'employerValue', 'positionValue', 'linkedinValue', 'lastConnectionValue', 'notesValue', 'nextConnectionValue'];
   const data = {
     rows: entries,
     columns: fields,
@@ -56,6 +52,11 @@ const MainContainer = () => {
     console.log('handle change');
     setNotesValue(event.target.value);
   };
+  const [nextConnectionValue, setNextConnectionValue] = useState('');
+  const handleNextConnectionChange = (event) => {
+    console.log('handle change');
+    setNextConnectionValue(event.target.value);
+  };
 
 
   const handleSubmit = async (event) => {
@@ -80,6 +81,8 @@ const MainContainer = () => {
           linkedinValue,
           lastConnectionValue,
           notesValue,
+          nextConnectionValue,
+          email: isAuthenticated.email,
         }),
       });
       const result = await response.json();
@@ -90,6 +93,7 @@ const MainContainer = () => {
       setLinkedinValue('');
       setLastConnectionValue('');
       setNotesValue('');
+      setNextConnectionValue('');
     } catch (error) {
       console.log(error);
     }
@@ -99,11 +103,22 @@ const MainContainer = () => {
     console.log('running use effect');
     const fetchData = async () => {
       console.log('before');
-      const dbEntries = await fetch('http://localhost:8080/entry');
+      const dbEntries = await fetch('http://localhost:8080/getEntry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          connectionName: inputValue,
+          employerValue,
+          positionValue,
+          linkedinValue,
+          lastConnectionValue,
+          notesValue,
+          nextConnectionValue,
+          email: isAuthenticated.email,
+        }),
+      });
       const response = await dbEntries.json();
-      // console.log('dbentries', response);
-      // console.log('dbentries', response);
-      // const json = await dbEntries.response.json();
+
       setEntries(response);
     };
     fetchData()
@@ -111,31 +126,23 @@ const MainContainer = () => {
   }, [inputValue]);
   return (
     <div className="container">
-      <ImplicitLogin />
-      {/* <GoogleLogin
-        onSuccess={credentialResponse => {
-          console.log(credentialResponse);
-        }}
-        onError={() => {
-          console.log('Login Failed');
-        }}
-      /> */}
-      ;
+
       <Table data={data} />
-      {/* {entries.map((element) => (
-        <Entry
-          key={element.connectionName}
-          connectionObj={element}
-        />
-      ))} */}
       <Input
-        // eslint-disable-next-line react/jsx-max-props-per-line
-        handleConnectionChange={handleConnectionChange} inputValue={inputValue}
-        handleEmployerChange={handleEmployerChange} employerValue={employerValue}
-        handlePositionChange={handlePositionChange} positionValue={positionValue}
-        handleLinkedinChange={handleLinkedinChange} linkedinValue={linkedinValue}
-        handleLastConnectionChange={handleLastConnectionChange} lastConnectionValue={lastConnectionValue}
-        handleNotesChange={handleNotesChange} notesValue={notesValue}
+        handleConnectionChange={handleConnectionChange}
+        inputValue={inputValue}
+        handleEmployerChange={handleEmployerChange}
+        employerValue={employerValue}
+        handlePositionChange={handlePositionChange}
+        positionValue={positionValue}
+        handleLinkedinChange={handleLinkedinChange}
+        linkedinValue={linkedinValue}
+        handleLastConnectionChange={handleLastConnectionChange}
+        lastConnectionValue={lastConnectionValue}
+        handleNotesChange={handleNotesChange}
+        notesValue={notesValue}
+        handleNextConnectionChange={handleNextConnectionChange}
+        nextConnectionValue={nextConnectionValue}
         handleSubmit={handleSubmit}
         displayFields={displayFields}
         fields={fields}

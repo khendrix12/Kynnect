@@ -7,7 +7,7 @@ const Input = (props) => (
         // eslint-disable-next-line jsx-a11y/label-has-for
         <label className="label" id={field} htmlFor={props.fields[idx]}>
           {field}
-          {field === 'Last Connection' ? '\nDD/MM/YYYY' : null}
+          {field === 'Last Connection' || field === 'Next Connection' ? '\nDD/MM/YYYY' : null}
         </label>
       ))}
     </div>
@@ -18,6 +18,7 @@ const Input = (props) => (
       <input type="text" id="linkedinValue" value={props.linkedinValue} onChange={props.handleLinkedinChange} placeholder="Enter linkedin here" />
       <input type="text" id="lastConnectionValue" value={props.lastConnectionValue} onChange={props.handleLastConnectionChange} placeholder="Enter last connection here" />
       <input type="text" id="notesValue" value={props.notesValue} onChange={props.handleNotesChange} placeholder="Enter notes here" />
+      <input type="text" id="nextConnectionValue" value={props.nextConnectionValue} onChange={props.handleNextConnectionChange} placeholder="Enter next connection date here" />
     </div>
     <div className="buttons">
       <button onClick={props.handleSubmit} type="submit" name="send" value="update">Submit</button>

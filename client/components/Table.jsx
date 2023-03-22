@@ -20,7 +20,7 @@ const Table = (props) => {
         if (column === 'linkedinValue') {
           return <td><a href={row[column]} target="_blank" rel="noreferrer">{row[column]}</a></td>;
         }
-        if (column === 'lastConnectionValue') {
+        if (column === 'lastConnectionValue' || column === 'nextConnectionValue') {
           const date = new Date(row[column]);
           return <td>{date.toDateString()}</td>;
         }

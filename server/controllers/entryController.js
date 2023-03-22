@@ -4,7 +4,9 @@ const Entry = require('../models/entryModel');
 const entryController = {};
 
 entryController.getEntries = (req, res, next) => {
-  Entry.find({}, (err, entries) => {
+  const { email } = req.body;
+  console.log('email', email);
+  Entry.find({ email }, (err, entries) => {
     console.log('users', entries);
     // if a database error occurs, call next with the error message passed in
     // for the express global error handler to catch
@@ -12,6 +14,7 @@ entryController.getEntries = (req, res, next) => {
 
     // store retrieved users into res.locals and move on to next middleware
     res.locals.entries = entries;
+    console.log('entries', entries);
     return next();
   });
 };
@@ -24,6 +27,7 @@ entryController.createEntry = (req, res, next) => {
     linkedinValue,
     lastConnectionValue,
     notesValue,
+    email,
   } = req.body;
   console.log(connectionName);
 
@@ -37,6 +41,7 @@ entryController.createEntry = (req, res, next) => {
     linkedinValue,
     lastConnectionValue,
     notesValue,
+    email,
   }, (err, connection) => {
     console.log('error', err);
     if (err) {
@@ -53,10 +58,10 @@ entryController.createEntry = (req, res, next) => {
 };
 
 entryController.deleteEntry = (req, res, next) => {
-  const { connectionName } = req.body;
+  const { connectionName, email } = req.body;
   console.log(connectionName);
 
-  Entry.deleteOne({ connectionName }, (err, connection) => {
+  Entry.deleteOne({ connectionName, email }, (err, connection) => {
     console.log('error', err);
     if (err) {
       return next({
