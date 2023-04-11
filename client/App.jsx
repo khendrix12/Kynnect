@@ -6,10 +6,10 @@ import {
   Routes,
 } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import MainContainer from './containers/MainContainer';
-import EmptyPage from './components/EmptyPage';
-import PrivateRoute from './components/PrivateRoute';
-import { AuthProvider } from './components/AuthContext';
+import MainContainer from './containers/MainContainer.jsx';
+import EmptyPage from './components/EmptyPage.jsx';
+import PrivateRoute from './components/PrivateRoute.jsx';
+import { AuthProvider } from './components/AuthContext.jsx';
 
 
 const App = () => {
