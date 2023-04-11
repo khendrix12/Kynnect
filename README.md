@@ -2,8 +2,9 @@
 <img src='https://img.shields.io/github/v/release/oslabs-beta/xkite?color=%a3f7bf&label=version&style=for-the-badge'>
 </div>
  <br>
-
- <img src='https://raw.githubusercontent.com/khendrix12/kynnect/assets/kynnect.png'>
+<div align='center'>
+<img src='https://github.com/khendrix12/Kynnect/blob/main/assets/kynnect.png'>
+</div>
 
 # Kynnect
 
