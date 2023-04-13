@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 
 const AuthContext = createContext({
-//   isAuthenticated: false,
   isAuthenticated: { status: false, email: '' },
   setIsAuthenticated: () => {},
 });

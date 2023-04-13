@@ -11,11 +11,11 @@ import EmptyPage from './components/EmptyPage.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
 import { AuthProvider } from './components/AuthContext.jsx';
 
-
 const App = () => {
   const history = createBrowserHistory();
+  console.log({ env: process.env.GOOGLE_CLIENT_ID });
   return (
-    <GoogleOAuthProvider clientId="340509063033-20l1i91ns6ghrmidifdg4nmuqhsqvde9.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID}>
       <AuthProvider>
         <Router history={history}>
           <Routes>
